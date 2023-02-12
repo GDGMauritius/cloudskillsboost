@@ -49,10 +49,12 @@ cd ~/monolith-to-microservices/react-app
 npm run build:monolith
 
 cd ~/monolith-to-microservices/monolith
-gcloud builds submit --tag us-central1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/monolith-demo/monolith:2.0.0
+
+export TAG=2.0.2
+gcloud builds submit --tag us-central1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/monolith-demo/monolith:${TAG}
 
 ## Task 6. Update website with zero downtime
 
-gcloud run deploy monolith --image us-central1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/monolith-demo/monolith:2.0.0 --region us-central1
+gcloud run deploy monolith --image us-central1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/monolith-demo/monolith:${TAG} --region us-central1
 gcloud run services describe monolith --platform managed --region us-central1
 gcloud beta run services list
